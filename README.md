@@ -77,6 +77,39 @@ The system accepts commands via UART (Baud Rate: `115200`).
 * **Emotional Triggers:**
     * `konus` (Speak), `sasir` (Shock), `kork` (Fear), `agla` (Cry).
 
+
+## 🔌 Circuit Diagram (Wiring)
+
+```mermaid
+graph TD
+    %% Bileşenler
+    ESP32[ESP32 Brain]
+    L298N[L298N Motor Driver]
+    OLED[OLED Display I2C]
+    HCSR04[Ultrasonic Sensor]
+    Buzzer((Buzzer))
+    Wheels((Wheels))
+
+    %% Bağlantılar
+    ESP32 -- GPIO 26, 27 --> L298N
+    ESP32 -- GPIO 14, 12 --> L298N
+    L298N ==> Wheels
+    
+    ESP32 -- GPIO 21 SDA --> OLED
+    ESP32 -- GPIO 22 SCL --> OLED
+    
+    ESP32 -- GPIO 5 Trig --> HCSR04
+    HCSR04 -- GPIO 18 Echo --> ESP32
+    
+    ESP32 -- GPIO 4 --> Buzzer
+    
+    %% Renklendirme
+    style ESP32 fill:#f9f,stroke:#333,stroke-width:2px
+    style L298N fill:#ff9,stroke:#333
+    style OLED fill:#9ff,stroke:#333
+```
+    
+
 ## 📄 License
 
 This project is open-source software distributed under the [MIT License](LICENSE).
