@@ -11,6 +11,7 @@
 #include "EnicFace.h"
 #include "EnicSense.h"
 #include "EnicState.h"
+#include "esp_system.h"
 
 EnicMotor motor;
 EnicFace  face;
@@ -27,7 +28,7 @@ void setup() {
 
   brain.begin();
 
-  randomSeed(analogRead(0));
+  randomSeed(esp_random() ^ micros());
 
   Serial.println("ENIC V1");
   Serial.println("Komutlar: ileri/geri/sol/sag | dur | otonom | dans | konus | dinle | sasir | kork | agla | dil");
